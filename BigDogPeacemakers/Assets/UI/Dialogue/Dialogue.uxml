@@ -1,0 +1,14 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Dialogue/DialogueUSS.uss?fileID=7433441132597879392&amp;guid=55537b459ef559844830ec7a1fa7072f&amp;type=3#DialogueUSS" />
+    <engine:VisualElement focusable="false" name="Body" class="body" style="flex-grow: 1; flex-direction: column; align-items: center;">
+        <engine:VisualElement style="flex-grow: 1; flex-direction: column-reverse; align-self: auto; align-items: flex-start;">
+            <engine:VisualElement style="flex-grow: 0; width: 1700px; height: 300px; flex-shrink: 0; background-color: rgba(0, 0, 0, 0.51); flex-direction: column; border-left-width: 3px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; padding-bottom: 0; margin-bottom: 10px; align-self: center; justify-content: flex-start;">
+                <engine:Label text="Label" name="content_text" class="content_text" style="font-size: 36px;" />
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 0; -unity-text-align: upper-left; width: auto; height: 250px; flex-shrink: 1; flex-direction: row; margin-left: 0; align-content: flex-start; align-items: flex-end;">
+                <engine:VisualElement name="image" style="flex-grow: 1; flex-shrink: 1; left: 0; width: 250px; height: 350px; -unity-text-outline-color: rgba(0, 0, 0, 0); flex-wrap: nowrap; color: rgba(27, 27, 27, 0);" />
+                <engine:Label text="Label" enabled="true" name="author_text" class="author_text" style="width: 600px; left: auto; font-size: 40px; flex-grow: 1;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

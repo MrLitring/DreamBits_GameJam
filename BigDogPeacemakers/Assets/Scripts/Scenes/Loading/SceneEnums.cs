@@ -6,8 +6,8 @@ public class SceneEnums
     {
         None = -1,
         MainMenu = 0,
-        TestMovement = 3,
-        NotSampleScene = 2
+        TestMovement = 2,
+        SampleScene_Moroz = 3,
     }
 
     public enum ScreenLoading
