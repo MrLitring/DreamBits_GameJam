@@ -12,22 +12,23 @@ public class PlayerMovementBehavior : MonoBehaviour
     public Transform groundCollider;
 
     [Header("Movement Settings")]
-    public float movementSpeed = 500f;
-    public float maxAirSpeed = 8f;
-    public float jumpForce = 10f;
+    [SerializeField] float movementSpeed = 500f;
+    [SerializeField] float maxAirSpeed = 8f;
+    [SerializeField] float jumpForce = 35f;
     int jumpCount = 0;
     int maxJumps = 1;
-
+    float acceleration;
     private Camera mainCamera;
     private Vector2 movementDirection;
     private bool grounded;
     
 
 
-    public void UpdateInputData(Vector2 vector, bool grounded)
+    public void UpdateInputData(Vector2 vector, bool grounded, float accelerationPercent)
     {
         movementDirection = vector;
         this.grounded = grounded;
+        this.acceleration = 1 + accelerationPercent;
     }
 
     
@@ -48,7 +49,7 @@ public class PlayerMovementBehavior : MonoBehaviour
     void MovePlayer()
     {
         Transform playerTransform = playerRigidbody.GetComponent<Transform>();
-        float x = movementDirection.x * Time.deltaTime * movementSpeed;
+        float x = movementDirection.x * Time.deltaTime * movementSpeed * acceleration;
         float y = playerTransform.position.y;
         if (grounded)
         {
