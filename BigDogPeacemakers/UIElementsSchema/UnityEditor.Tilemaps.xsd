@@ -52,11 +52,7 @@
         <xs:attribute default="" name="binding-path" type="xs:string" use="optional" />
         <xs:attribute default="" name="label" type="xs:string" use="optional" />
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
         <xs:attribute default="null" name="value" type="xs:string" use="optional" />
-=======
-        <xs:attribute default="TemplateSolid (UnityEngine.GameObject)" name="value" type="xs:string" use="optional" />
->>>>>>> Stashed changes
 =======
         <xs:attribute default="TemplateSolid (UnityEngine.GameObject)" name="value" type="xs:string" use="optional" />
 >>>>>>> Stashed changes
@@ -132,11 +128,7 @@
         <xs:attribute default="" name="binding-path" type="xs:string" use="optional" />
         <xs:attribute default="" name="label" type="xs:string" use="optional" />
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
         <xs:attribute default="null" name="value" type="xs:string" use="optional" />
-=======
-        <xs:attribute default="" name="value" type="xs:string" use="optional" />
->>>>>>> Stashed changes
 =======
         <xs:attribute default="" name="value" type="xs:string" use="optional" />
 >>>>>>> Stashed changes

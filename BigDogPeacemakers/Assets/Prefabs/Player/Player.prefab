@@ -249,15 +249,11 @@ GameObject:
   - component: {fileID: 5078626566900481867}
   - component: {fileID: 6557188314918946776}
   m_Layer: 3
-<<<<<<< Updated upstream
 <<<<<<< Updated upstream:BigDogPeacemakers/Assets/Prefabs/Player/TemplatePlayer.prefab
   m_Name: TemplatePlayer
 =======
   m_Name: Player
 >>>>>>> Stashed changes:BigDogPeacemakers/Assets/Prefabs/Player/Player.prefab
-=======
-  m_Name: Player
->>>>>>> Stashed changes
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
