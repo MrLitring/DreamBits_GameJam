@@ -1,0 +1,4 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Toolkit/USS/hitbox.uss?fileID=7433441132597879392&amp;guid=64b0a0bfd10b2d348a9dc849a2acef6e&amp;type=3#hitbox" />
+    <engine:ProgressBar value="22" title="health" name="ProgressBar" style="position: absolute; height: 49px; width: 342px;" />
+</engine:UXML>
