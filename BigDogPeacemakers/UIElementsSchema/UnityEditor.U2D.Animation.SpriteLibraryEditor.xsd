@@ -2,6 +2,7 @@
 <xs:schema xmlns:editor="UnityEditor.UIElements" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEditor.Accessibility" elementFormDefault="qualified" targetNamespace="UnityEditor.U2D.Animation.SpriteLibraryEditor" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <xs:complexType name="EditorTabHeaderType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -27,6 +28,8 @@
   <xs:element name="EditorTabHeader" substitutionGroup="engine:VisualElement" xmlns:q1="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q1:EditorTabHeaderType" />
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   <xs:complexType name="EditorTopToolbarType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -50,8 +53,11 @@
     </xs:complexContent>
   </xs:complexType>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <xs:element name="EditorTopToolbar" substitutionGroup="engine:VisualElement" xmlns:q2="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q2:EditorTopToolbarType" />
 =======
+=======
+>>>>>>> Stashed changes
   <xs:element name="EditorTopToolbar" substitutionGroup="engine:VisualElement" xmlns:q1="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q1:EditorTopToolbarType" />
   <xs:complexType name="EditorBottomToolbarType">
     <xs:complexContent mixed="false">
@@ -122,6 +128,9 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="CategoriesTab" substitutionGroup="engine:VisualElement" xmlns:q4="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q4:CategoriesTabType" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   <xs:simpleType name="GridView_selection-type_Type">
     <xs:restriction base="xs:string">
@@ -149,7 +158,11 @@
         <xs:attribute default="30" name="item-height" type="xs:int" use="optional" />
         <xs:attribute default="false" name="item-square" type="xs:boolean" use="optional" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <xs:attribute default="Single" name="selection-type" xmlns:q3="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q3:GridView_selection-type_Type" use="optional" />
+=======
+        <xs:attribute default="Single" name="selection-type" xmlns:q5="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q5:GridView_selection-type_Type" use="optional" />
+>>>>>>> Stashed changes
 =======
         <xs:attribute default="Single" name="selection-type" xmlns:q5="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q5:GridView_selection-type_Type" use="optional" />
 >>>>>>> Stashed changes
@@ -161,6 +174,7 @@
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   <xs:element name="GridView" substitutionGroup="engine:VisualElement" xmlns:q4="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q4:GridViewType" />
   <xs:complexType name="LabelsTabType">
@@ -235,6 +249,9 @@
 =======
   <xs:element name="GridView" substitutionGroup="engine:VisualElement" xmlns:q6="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q6:GridViewType" />
 >>>>>>> Stashed changes
+=======
+  <xs:element name="GridView" substitutionGroup="engine:VisualElement" xmlns:q6="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q6:GridViewType" />
+>>>>>>> Stashed changes
   <xs:complexType name="EditorMainWindowType">
     <xs:complexContent mixed="false">
       <xs:restriction base="engine:VisualElementType">
@@ -258,8 +275,11 @@
     </xs:complexContent>
   </xs:complexType>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   <xs:element name="EditorMainWindow" substitutionGroup="engine:VisualElement" xmlns:q8="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q8:EditorMainWindowType" />
 =======
+=======
+>>>>>>> Stashed changes
   <xs:element name="EditorMainWindow" substitutionGroup="engine:VisualElement" xmlns:q7="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q7:EditorMainWindowType" />
   <xs:complexType name="EditorTabHeaderType">
     <xs:complexContent mixed="false">
@@ -284,5 +304,8 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="EditorTabHeader" substitutionGroup="engine:VisualElement" xmlns:q8="UnityEditor.U2D.Animation.SpriteLibraryEditor" type="q8:EditorTabHeaderType" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 </xs:schema>

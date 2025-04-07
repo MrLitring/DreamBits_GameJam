@@ -55,7 +55,11 @@
         <xs:attribute default="" name="name" type="xs:string" use="optional" />
         <xs:attribute default="true" name="enabled" type="xs:boolean" use="optional" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <xs:attribute default="b80776d2-5107-4ce3-bc67-489daaff299f" name="view-data-key" type="xs:string" use="optional" />
+=======
+        <xs:attribute default="e43bb8fd-f52a-423a-a575-679b7e0e98e8" name="view-data-key" type="xs:string" use="optional" />
+>>>>>>> Stashed changes
 =======
         <xs:attribute default="e43bb8fd-f52a-423a-a575-679b7e0e98e8" name="view-data-key" type="xs:string" use="optional" />
 >>>>>>> Stashed changes

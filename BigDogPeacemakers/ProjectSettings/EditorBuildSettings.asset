@@ -7,12 +7,15 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     path: Assets/Scenes/MainMenu.unity
     guid: 66537f5dfafac1f45a9149074c04af30
   - enabled: 1
     path: Assets/Scenes/ScreenLoaders/ScreenLoader_1.unity
     guid: e9f54ef7431fe2644acedb448b4009d4
   - enabled: 0
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     path: Assets/Scenes/NotSampleScene.unity

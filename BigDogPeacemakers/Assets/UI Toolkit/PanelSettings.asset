@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: PanelSettings
   m_EditorClassIdentifier: 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   themeUss: {fileID: -4733365628477956816, guid: eac169f2c4ed7c445b3011930f6aa176, type: 3}
+=======
+  themeUss: {fileID: -4733365628477956816, guid: a0e155a2589ce704ea9a50663873099d, type: 3}
+>>>>>>> Stashed changes
 =======
   themeUss: {fileID: -4733365628477956816, guid: a0e155a2589ce704ea9a50663873099d, type: 3}
 >>>>>>> Stashed changes
@@ -42,7 +46,11 @@ MonoBehaviour:
     m_MaxAtlasSize: 4096
     m_MaxSubTextureSize: 64
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_ActiveFilters: 31
+=======
+    m_ActiveFilters: -1
+>>>>>>> Stashed changes
 =======
     m_ActiveFilters: -1
 >>>>>>> Stashed changes
