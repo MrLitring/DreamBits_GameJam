@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     PlayerMovement playerMovement;
     GroundChecker groundChecker;
     PlayerAttack playerAttack;
+    PlayerInteract playerInteract;
 
     // Добавить инвентарь?
     private void Start()
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
         playerInputHandler = GetComponent<PlayerInputHandler>();
         groundChecker = GetComponent<GroundChecker>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerInteract = GetComponent<PlayerInteract>();
     }
 
     private void Update()
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);
         playerAttack.UpdateInputData(isAttack, isGrounded);
+        playerInteract.UpdateInputData(isInteract);
     }
 
 

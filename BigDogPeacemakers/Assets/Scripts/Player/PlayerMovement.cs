@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
     float timerDash;
     float cooldownDash;
 
-    float timerAttack;
-    
+    float timerJump;
+    float cooldownJump;
 
 
     Weapon weapon;
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         cooldownDash = 2.0f;
+        cooldownJump = 0.5f;
         isLeft = spriteRenderer.flipX;
 
     }
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("AirSpeedY", rb.linearVelocityY);
         animator.SetBool("Grounded", grounded);
         if (timerDash > 0) timerDash -= Time.deltaTime;
-        if (timerAttack > 0) timerAttack -= Time.deltaTime;
+        if (timerJump > 0) timerJump -= Time.deltaTime;
     }
 
 
@@ -127,13 +128,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (jump && grounded)
+        if (jump && grounded && timerJump <= 0)
         {
             rb.linearVelocityY = 0;
             var stayJump = new Vector2(0, jumpForce);
             var jumpDirection = stayJump + move;
             rb.AddForce(stayJump, ForceMode2D.Impulse);
             animator.SetTrigger("Jump");
+            timerJump = cooldownJump;
             jump = false;
         }
     }
