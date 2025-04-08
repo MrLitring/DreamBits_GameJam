@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using System.Text;
-using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class DialogueManager : MonoBehaviour, INeedToLoad
 {
-    public List<string> query = new System.Collections.Generic.List<string>();
-    public int CurrentID = 0;
+    public bool IsShowDebug = false;
+
+    public List<string> querys = new System.Collections.Generic.List<string>();
+    public bool isActive { get; private set; } = false;
     
 
 
@@ -18,97 +19,85 @@ public class DialogueManager : MonoBehaviour, INeedToLoad
     private Label contentLabel;
     private Label authorText;
     private VisualElement imageElement;
-
-    private bool isActive;
-
-    private void SplitRoot()
-    {
-        if (uidocument == null) return;
-        root = uidocument.rootVisualElement;
-
-        if(root == null) return;
-        contentLabel = root.Q<Label>("content_text");
-        authorText = root.Q<Label>("author_text");
-        imageElement = root.Q<VisualElement>("image");
-    }
-
+    
+    private bool isValidate { get; set; } = false;
+    public int CurrentID = 0;
 
     void INeedToLoad.NeedToFirstLoad()
     {
-        if (uidocument == null) return;
-        isActive = uidocument.gameObject.activeSelf;
+        CurrentID = 0;
         SplitRoot();
-        Load();
 
-        var current = dialogueDatas[CurrentID];
-
-        if (contentLabel != null)
-            contentLabel.text = current.content;
-
-        if (authorText != null)
-            authorText.text = current.author;
-
+        if (!isValidate)
+        {
+            if (IsShowDebug) Debug.Log("DialogueManager: Ќе прошли валидацию, что-то было утер€но из UI");
+            return;
+        }
+        else
+            uidocument.gameObject.SetActive(isActive);
+        DataLoad();
+        UpdateContent();
     }
 
-    public void NextText()
+    public void ShowDialogue(bool active = true)
     {
+        if (!isValidate) return;
+
+        uidocument.gameObject.SetActive(active);
+        isActive = active;
+        UpdateContent();
+    }
+
+    public void ShowNextDialogue()
+    {
+        if (!isValidate || !isActive) return;
+
         CurrentID++;
         UpdateContent();
+
     }
 
-    public void Show()
-    {
-        uidocument.gameObject.SetActive(!isActive);
-        UpdateContent();
-    }
-    public void Show(bool active)
-    {
-        isActive = active;
-        uidocument.gameObject.SetActive(active);
-        UpdateContent();
-    }
 
     private void UpdateContent()
     {
-        if (!isActive) return;
-
-        CurrentID = Mathf.Clamp(CurrentID, 0, dialogueDatas.Count);
+        if ((CurrentID > -1 && CurrentID < dialogueDatas.Count) == false) { ShowDialogue(false); return; }
 
         authorText.text = dialogueDatas[CurrentID].author;
         contentLabel.text = dialogueDatas[CurrentID].content;
-
-        if(CurrentID == dialogueDatas.Count - 1) Show(false);
+                
     }
 
-    private void Load()
+    private void DataLoad()
     {
-        for (int i = 0; i < query.Count; i++)
-        {
-            string author;
-            int[] id;
-            Format(query[i], out author,out id);
+        foreach (string elem in querys)
+            dialogueDatas.AddRange(DialogueDataLoader.GetDatas(elem));
 
-            for (int j = 0; j < id.Length; j++)
+    }
+
+    private void SplitRoot()
+    {
+        isValidate = false;
+
+        if (uidocument != null)
+        {
+            try
             {
-                DialogueData data = new DialogueData(author, id[j].ToString());
-                dialogueDatas.Add(data);
+                root = uidocument.rootVisualElement;
+
+                if (root == null) return;
+                contentLabel = root.Q<Label>("content_text");
+                authorText = root.Q<Label>("author_text");
+                imageElement = root.Q<VisualElement>("image");
+
+                isValidate = true;
+            }
+            catch
+            {
+                isValidate = false;
             }
         }
-    }
 
-    private string Format(string value, out string name, out int[] id)
-    {
-        value = value.Replace(" ", "");
-        name = value.Split(':')[0];
-
-        string[] parts = value.Split(":")[1].Split('-');
-        id = new int[parts.Length];
-        for (int i = 0; i < parts.Length; i++)
-        {
-            id[i] = int.Parse(parts[i]);
-        }
-
-        return value;
+        if (IsShowDebug) Debug.Log("UI загружен - " + isValidate);
     }
 
 }
