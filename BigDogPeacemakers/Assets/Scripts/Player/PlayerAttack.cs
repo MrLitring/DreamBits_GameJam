@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("Block");
                 timerAttack = cooldownAttack;
                 Instantiate(weapon.weaponData.projectilePreFab, transform);
-                Debug.Log("Позиция объекта - " + transform.position);
+
                 
             }
             timerAttack = cooldownAttack;

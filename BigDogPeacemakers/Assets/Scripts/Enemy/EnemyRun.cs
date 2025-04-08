@@ -22,7 +22,18 @@ public class EnemyRun : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, Time.deltaTime * speed);
         Debug.Log("Новый вектор" + target);
         //rb.MovePosition(newPos);
-        rb.linearVelocity = (new Vector2(-newPos.x, player.position.y));
+        //rb.AddForceAtPosition(new Vector2(10, 0), player.position);
+        Rigidbody2D player_rb = player.GetComponent<Rigidbody2D>();
+        Vector2 vec = player_rb.position.normalized;
+        if (rb.position.x - player.position.x > 0)
+        {
+            rb.linearVelocity = vec * -10;
+        }
+        else
+        {
+            rb.linearVelocity = vec * 10;
+        }
+        
         //rb.linearVelocityX = Mathf.Min(30, Mathf.Abs(rb.linearVelocity.x));
     }
 
