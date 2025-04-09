@@ -32,8 +32,8 @@ public class GroundChecker : MonoBehaviour
     private void Update()
     {
 
-        var results = new List<Collider2D>();  // Список для хранения результатов
-        thisCollider.Overlap(results);  // Заполняем список коллайдерами, пересекающими parentCollider
+        var results = new List<Collider2D>();  
+        thisCollider.Overlap(results);  
         IsGrounded = false;
         foreach (var col in results)
         {
@@ -41,48 +41,6 @@ public class GroundChecker : MonoBehaviour
             {
                 IsGrounded = true; break;
             } 
-            Debug.Log("Обнаружен объект: " + col.name);  // Вывод имён пересекающихся объектов
         }
-        /*
-        if (results.Count > 0) IsGrounded = true;
-        else IsGrounded = false;
-
-        
-        currentColliders = new List<Collider2D>();
-        thisCollider.Overlap(filter, currentColliders);
-        if (oldColliders == null) oldColliders = currentColliders;
-        if (currentColliders != oldColliders)
-        {
-            IsGrounded = false;
-            foreach (var col in oldColliders)
-            {
-                if (1 << col.gameObject.layer == groundLayer)
-                {
-                    IsGrounded = true;
-                    break;
-                }
-            }
-            oldColliders = currentColliders;
-            foreach (var col in currentColliders) print(col.name);
-        }
-        if (currentColliders.Count == 0) print("Коллайдеры пусты");
-        */
     }
-
-
-    /*
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        LayerMask layerMask = 1 << collision.gameObject.layer;
-
-        if (layerMask == groundLayer) IsGrounded = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        LayerMask layerMask = 1 << collision.gameObject.layer;
-
-        if (layerMask == groundLayer) IsGrounded = false;
-    }
-    */
 }

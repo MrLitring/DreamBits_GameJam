@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Static Variables
     float movementSpeed = 500f;
-    //float maxAirSpeed = 8f;
+
     float jumpForce = 35f;
     float acceleration = 1.5f;
     Rigidbody2D rb;

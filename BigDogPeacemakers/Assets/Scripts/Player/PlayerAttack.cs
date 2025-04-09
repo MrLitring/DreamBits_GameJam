@@ -41,8 +41,6 @@ public class PlayerAttack : MonoBehaviour
             if (isMelee)
             {
                 animator.SetTrigger("Attack1");
-                
-
                 if (weapon.enemy != null || weapon.enemy.Count != 0)
                 {
                     foreach (var enemy in weapon.enemy)
@@ -50,7 +48,6 @@ public class PlayerAttack : MonoBehaviour
                         TestStaticObj testStaticObj = enemy.GetComponent<TestStaticObj>();
                         testStaticObj.TakeDamage(1);
                     }
-
                 }
             }
             else
@@ -58,8 +55,6 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("Block");
                 timerAttack = cooldownAttack;
                 Instantiate(weapon.weaponData.projectilePreFab, transform);
-
-                
             }
             timerAttack = cooldownAttack;
         }

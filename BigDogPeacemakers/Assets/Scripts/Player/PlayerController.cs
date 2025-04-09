@@ -28,12 +28,6 @@ public class PlayerController : MonoBehaviour
         bool isSprint = playerInputHandler.IsSprint();
         bool isInteract = playerInputHandler.IsInteract();
         bool isGrounded = groundChecker.IsGrounded;
-        if (isJump) print("Jump");
-        if (isSprint) print("Sprint");
-        if (isDash) print("Dash");
-        if (isGrounded) print("Grounded"); else print("Not Grounded");
-        if (isInteract) print("Interact");
-        if (isAttack) print("Attack");
 
 
         playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);

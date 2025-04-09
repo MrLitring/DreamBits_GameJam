@@ -17,20 +17,12 @@ public class Projectile : MonoBehaviour
         Vector3 objectPos = transform.position;
         Vector3 directionToMouse = mouseWorldPos - objectPos;
 
-        float hipotenusa = Mathf.Sqrt(Mathf.Pow(directionToMouse.x, 2) + Mathf.Pow(directionToMouse.y, 2));
-        float katet = directionToMouse.y;
-        float degree = (Mathf.Asin(katet / hipotenusa) * 180) / Mathf.PI;
- 
-
-
 
         float sum = Mathf.Abs(directionToMouse.x) + Mathf.Abs(directionToMouse.y);
         Vector2 vector = new Vector2(directionToMouse.x / sum, directionToMouse.y / sum);
       
-        
         speed = 50;
         rb.AddForce(vector * speed, ForceMode2D.Impulse);
-        // = vector * speed;
         lifetime = 3.0f;
         Destroy(gameObject, lifetime);
     }
