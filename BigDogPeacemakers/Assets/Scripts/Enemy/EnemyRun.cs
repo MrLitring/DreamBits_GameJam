@@ -17,24 +17,33 @@ public class EnemyRun : StateMachineBehaviour
     {
 
         if (player == null) Debug.Log("Игрок не найден");
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-        //Debug.Log("Целевой вектор" + target);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, Time.deltaTime * speed);
-        Debug.Log("Новый вектор" + target);
-        //rb.MovePosition(newPos);
-        //rb.AddForceAtPosition(new Vector2(10, 0), player.position);
-        Rigidbody2D player_rb = player.GetComponent<Rigidbody2D>();
-        Vector2 vec = player_rb.position.normalized;
-        if (rb.position.x - player.position.x > 0)
-        {
-            rb.linearVelocity = vec * -10;
-        }
         else
         {
-            rb.linearVelocity = vec * 10;
+            Vector2 target = new Vector2(player.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, Time.deltaTime * speed);
+            Rigidbody2D player_rb = player.GetComponent<Rigidbody2D>();
+            SpriteRenderer sr = animator.GetComponent<SpriteRenderer>();
+
+            Vector2 vec = player_rb.position.normalized;
+            if (Vector2.Distance(rb.position, player_rb.position) < 3.2)
+            {
+                animator.SetTrigger("Attack1");
+            }
+            else
+            {
+                if (rb.position.x - player.position.x > 0)
+                {
+                    rb.linearVelocity = vec * -10;
+                    sr.flipX = true;
+                }
+                else
+                {
+                    rb.linearVelocity = vec * 10;
+                    sr.flipX = false;
+                }
+            }
         }
-        
-        //rb.linearVelocityX = Mathf.Min(30, Mathf.Abs(rb.linearVelocity.x));
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

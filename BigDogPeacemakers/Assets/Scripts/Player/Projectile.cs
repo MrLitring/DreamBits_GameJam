@@ -30,10 +30,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TestStaticObj staticObj;
-        if (collision.CompareTag("Enemy") && collision.TryGetComponent<TestStaticObj>(out staticObj))
+        EnemyState enemyObj;
+        if (collision.CompareTag("Enemy") && collision.TryGetComponent<EnemyState>(out enemyObj))
         {
-            collision.GetComponent<TestStaticObj>().TakeDamage(damage);
+            collision.GetComponent<EnemyState>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

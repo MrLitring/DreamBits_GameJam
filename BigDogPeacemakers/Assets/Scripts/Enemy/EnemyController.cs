@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
         playerCheker = GetComponentInParent<PlayerCheker>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         isGrounded = groundChecker.IsGrounded;

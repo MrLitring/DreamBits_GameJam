@@ -7,7 +7,7 @@ public class DamageZone : MonoBehaviour
     float cooldown;
     private void Start()
     {
-        cooldown = 0.5f;
+        cooldown = 0.1f;
         timer = 0;
     }
     private void Update()
