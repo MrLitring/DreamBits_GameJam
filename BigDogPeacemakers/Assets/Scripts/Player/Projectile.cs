@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     public int damage;
     public float lifetime;
     public float speed;
+    public float range;
     Rigidbody2D rb;
     public Transform player;
 
@@ -23,7 +24,7 @@ public class Projectile : MonoBehaviour
       
         speed = 50;
         rb.AddForce(vector * speed, ForceMode2D.Impulse);
-        lifetime = 3.0f;
+        lifetime = lifetime > 0 ? lifetime : range / speed; // время = расстояние / скорость
         Destroy(gameObject, lifetime);
     }
 

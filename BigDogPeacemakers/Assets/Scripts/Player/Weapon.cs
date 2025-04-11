@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : Item
 {
     [NonSerialized]public WeaponData weaponData;
-    
+
     public List<GameObject> enemy;
     
 
@@ -15,24 +15,23 @@ public class Weapon : Item
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         weaponData = GetComponent<WeaponData>();
-
     }
     
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && !enemy.Contains(collision.gameObject))
         {
-
-            
             enemy.Add(collision.gameObject);
         }
-        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.CompareTag("Enemy"))
+        {
+            enemy.Remove(collision.gameObject);
+        }
         
-        enemy.Remove(collision.gameObject);
     }
 
 }

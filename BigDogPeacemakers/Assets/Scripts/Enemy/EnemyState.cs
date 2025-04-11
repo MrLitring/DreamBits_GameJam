@@ -8,12 +8,14 @@ public class EnemyState : MonoBehaviour
 
     float red;
     SpriteRenderer spriteRenderer;
+    Animator animator;
 
     float timeAnim = 2f;
     float timerAnim = 0f;
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();    
         red = spriteRenderer.color.r;
         Health = maxHP;
     }
@@ -24,7 +26,7 @@ public class EnemyState : MonoBehaviour
         print("Health Enemy = " + Health);
         if (Health == 0)
         {
-            Destroy(gameObject);
+            PlayDeathAnim();
         }
         StartCoroutine(PlayDamageAnim());
     }
@@ -46,5 +48,11 @@ public class EnemyState : MonoBehaviour
             // timerAnim -= Time.deltaTime;
         }
         
+    }
+    void PlayDeathAnim()
+    {
+        animator.SetTrigger("Death");
+
+        Destroy(gameObject, 1f);
     }
 }

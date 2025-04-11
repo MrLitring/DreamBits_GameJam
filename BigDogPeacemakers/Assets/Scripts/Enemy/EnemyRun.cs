@@ -5,11 +5,16 @@ public class EnemyRun : StateMachineBehaviour
     public float speed = 100f;
     Transform player;
     Rigidbody2D rb;
+    SpriteRenderer sr;
+    Transform weaponTransform;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
+        sr = animator.GetComponent<SpriteRenderer>();
+        weaponTransform = animator.GetComponentInChildren<Weapon>().transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,7 +27,7 @@ public class EnemyRun : StateMachineBehaviour
             Vector2 target = new Vector2(player.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, Time.deltaTime * speed);
             Rigidbody2D player_rb = player.GetComponent<Rigidbody2D>();
-            SpriteRenderer sr = animator.GetComponent<SpriteRenderer>();
+            
 
             Vector2 vec = player_rb.position.normalized;
             if (Vector2.Distance(rb.position, player_rb.position) < 3.2)
@@ -35,11 +40,13 @@ public class EnemyRun : StateMachineBehaviour
                 {
                     rb.linearVelocity = vec * -10;
                     sr.flipX = true;
+                    weaponTransform.rotation = new Quaternion(0, 180, 0, 1);
                 }
                 else
                 {
                     rb.linearVelocity = vec * 10;
                     sr.flipX = false;
+                    weaponTransform.rotation = new Quaternion(0, 0, 0, 1);
                 }
             }
         }
