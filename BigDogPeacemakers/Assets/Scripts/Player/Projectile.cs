@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
     public int damage;
     public float lifetime;
     public float speed;
+    public float range;
     Rigidbody2D rb;
     public Transform player;
 
@@ -17,31 +18,23 @@ public class Projectile : MonoBehaviour
         Vector3 objectPos = transform.position;
         Vector3 directionToMouse = mouseWorldPos - objectPos;
 
-        float hipotenusa = Mathf.Sqrt(Mathf.Pow(directionToMouse.x, 2) + Mathf.Pow(directionToMouse.y, 2));
-        float katet = directionToMouse.y;
-        float degree = (Mathf.Asin(katet / hipotenusa) * 180) / Mathf.PI;
-        print("Угол равен = "+degree);
 
-
-        Debug.Log("Вектор направления - " + directionToMouse);
         float sum = Mathf.Abs(directionToMouse.x) + Mathf.Abs(directionToMouse.y);
         Vector2 vector = new Vector2(directionToMouse.x / sum, directionToMouse.y / sum);
-        Debug.Log("Вектор направления - " + vector);
-        
+      
         speed = 50;
         rb.AddForce(vector * speed, ForceMode2D.Impulse);
-        // = vector * speed;
-        lifetime = 3.0f;
+        lifetime = lifetime > 0 ? lifetime : range / speed; // время = расстояние / скорость
         Destroy(gameObject, lifetime);
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TestStaticObj staticObj;
-        if (collision.CompareTag("Enemy") && collision.TryGetComponent<TestStaticObj>(out staticObj))
+        EnemyState enemyObj;
+        if (collision.CompareTag("Enemy") && collision.TryGetComponent<EnemyState>(out enemyObj))
         {
-            collision.GetComponent<TestStaticObj>().TakeDamage(damage);
+            collision.GetComponent<EnemyState>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

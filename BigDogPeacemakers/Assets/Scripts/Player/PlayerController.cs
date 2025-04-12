@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
     GroundChecker groundChecker;
     PlayerAttack playerAttack;
     PlayerInteract playerInteract;
+    PlayerState playerState;
 
+    bool isPlay;
     // Добавить инвентарь?
     private void Start()
     {
@@ -17,28 +19,28 @@ public class PlayerController : MonoBehaviour
         groundChecker = GetComponent<GroundChecker>();
         playerAttack = GetComponent<PlayerAttack>();
         playerInteract = GetComponent<PlayerInteract>();
+        playerState = GetComponent<PlayerState>();
     }
 
     private void Update()
     {
-        Vector2 move = playerInputHandler.GetMove();
-        bool isAttack = playerInputHandler.IsAttack();
-        bool isDash = playerInputHandler.IsDash();
-        bool isJump = playerInputHandler.IsJump();
-        bool isSprint = playerInputHandler.IsSprint();
-        bool isInteract = playerInputHandler.IsInteract();
-        bool isGrounded = groundChecker.IsGrounded;
-        if (isJump) print("Jump");
-        if (isSprint) print("Sprint");
-        if (isDash) print("Dash");
-        if (isGrounded) print("Grounded"); else print("Not Grounded");
-        if (isInteract) print("Interact");
-        if (isAttack) print("Attack");
+        isPlay = playerState.Health > 0 ? true : false;
+
+        if (isPlay)
+        {
+            Vector2 move = playerInputHandler.GetMove();
+            bool isAttack = playerInputHandler.IsAttack();
+            bool isDash = playerInputHandler.IsDash();
+            bool isJump = playerInputHandler.IsJump();
+            bool isSprint = playerInputHandler.IsSprint();
+            bool isInteract = playerInputHandler.IsInteract();
+            bool isGrounded = groundChecker.IsGrounded;
 
 
-        playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);
-        playerAttack.UpdateInputData(isAttack, isGrounded);
-        playerInteract.UpdateInputData(isInteract);
+            playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);
+            playerAttack.UpdateInputData(isAttack, isGrounded);
+            playerInteract.UpdateInputData(isInteract);
+        }
     }
 
 

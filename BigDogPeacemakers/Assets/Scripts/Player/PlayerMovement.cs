@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Static Variables
     float movementSpeed = 500f;
-    //float maxAirSpeed = 8f;
+
     float jumpForce = 35f;
     float acceleration = 1.5f;
     Rigidbody2D rb;
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (jump && grounded && timerJump <= 0)
+        if (jump && grounded && timerJump <= 0 && !dash)
         {
             rb.linearVelocityY = 0;
             var stayJump = new Vector2(0, jumpForce);
@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        if (grounded && dash && timerDash <= 0)
+        if (grounded && dash && timerDash <= 0 && !jump)
         {
             animator.SetTrigger("Roll");
             if (isLeft)
