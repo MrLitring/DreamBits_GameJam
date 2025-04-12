@@ -6,13 +6,9 @@ public class SceneEnums
     {
         None = -1,
         MainMenu = 0,
+        ScreenLoader_1 = 1,
         TestMovement = 2,
         SampleScene_Moroz = 3,
-    }
-
-    public enum ScreenLoading
-    {
-        None = -1,
-        ScreenLoader_1 = 1
+        Prologue = 4
     }
 }
