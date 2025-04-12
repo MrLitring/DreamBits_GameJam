@@ -529,21 +529,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 486500663055045621, guid: 5656f00fff5a0a94c8f416d04476fad0, type: 3}
+      propertyPath: other
+      value: 
+      objectReference: {fileID: 1908063665}
     - target: {fileID: 3141110016407516259, guid: 5656f00fff5a0a94c8f416d04476fad0, type: 3}
       propertyPath: m_Name
       value: FightZone
-      objectReference: {fileID: 0}
-    - target: {fileID: 3141110016407516259, guid: 5656f00fff5a0a94c8f416d04476fad0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5229008126273863001, guid: 5656f00fff5a0a94c8f416d04476fad0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6875897561713555412, guid: 5656f00fff5a0a94c8f416d04476fad0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
