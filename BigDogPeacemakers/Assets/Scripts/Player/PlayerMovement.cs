@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+   
     // Dynamic Variables
     private Vector2 move;
     private bool jump;
@@ -13,16 +15,16 @@ public class PlayerMovement : MonoBehaviour
     private bool interact;
     private bool attack;
     private bool grounded;
-    private bool isLeft;
+    public bool isLeft { get; private set; }
 
     // Static Variables
-    float movementSpeed = 500f;
+    public float movementSpeed = 500f;
 
-    float jumpForce = 35f;
+    public float jumpForce = 35f;
     float acceleration = 1.5f;
     Rigidbody2D rb;
     Animator animator;
-    SpriteRenderer spriteRenderer;
+    PolygonCollider2D polygonCollider2D;
     float timerDash;
     float cooldownDash;
 
@@ -39,13 +41,20 @@ public class PlayerMovement : MonoBehaviour
 
 
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
+        animator = transform.Find("Visual").gameObject.GetComponent<Animator>();//;.GetComponent<Animator>();
+        
         cooldownDash = 2.0f;
         cooldownJump = 0.5f;
-        isLeft = spriteRenderer.flipX;
-
+        polygonCollider2D = GetComponent<PolygonCollider2D>();
+        
+        if (transform.rotation.y == 0)
+        {
+            isLeft = false;
+        }
+        else
+        {
+            isLeft = true;
+        }
     }
 
 
@@ -69,8 +78,6 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         Dash();
         
-        SpinWeaponCollider();
-        //Fall();
         animator.SetFloat("AirSpeedY", rb.linearVelocityY);
         animator.SetBool("Grounded", grounded);
         if (timerDash > 0) timerDash -= Time.deltaTime;
@@ -103,28 +110,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (x < 0)
         {
+            transform.rotation = new Quaternion(0, 180, 0, 0);
             isLeft = true;
-            spriteRenderer.flipX = isLeft;
         }
         else if (x > 0)
         {
+            transform.rotation = new Quaternion(0, 0, 0, 0);
             isLeft = false;
-            spriteRenderer.flipX = isLeft;
-
         }
     }
 
-    void SpinWeaponCollider()
-    {
-        if (isLeft)
-        {
-            weapon.transform.rotation = new Quaternion(0, 180, 0, 1);
-        }
-        else
-        {
-            weapon.transform.rotation = new Quaternion(0, 0, 0, 1);
-        }
-    }
+    
 
     void Jump()
     {

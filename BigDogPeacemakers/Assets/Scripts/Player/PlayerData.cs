@@ -1,32 +1,22 @@
-
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-[System.Serializable]
-public class PlayerData
+public class PlayerData : MonoBehaviour
 {
-
-    public int Health;
-    public int MaxHealth;
-   
-
-    public PlayerData(int health, int maxHealth)
+    private Light2D lightOfSphere;
+    public PlayerSettings settings;
+    public Color SphereColor {  get; private set; }
+    void Awake()
     {
-        Health = health;
-        MaxHealth = maxHealth;
+        lightOfSphere = transform.Find("EnergySphere").GetComponent<Light2D>();
+        lightOfSphere.color = settings.sphereColor;
+        SphereColor = lightOfSphere.color;
     }
 
-    public void TakeDamage(int damage)
+    public void ChangeColor(Color color)
     {
-        Health -= Mathf.Max(Health - damage, 0);
+        settings.sphereColor = color;
+        lightOfSphere.color = settings.sphereColor;
+        SphereColor = lightOfSphere.color;
     }
-
-    public void Heal(int heal)
-    {
-        Health -= Mathf.Min(Health  + heal, MaxHealth);
-    }
-
-    // AddItem
-
-    // EquipedItem
-
 }

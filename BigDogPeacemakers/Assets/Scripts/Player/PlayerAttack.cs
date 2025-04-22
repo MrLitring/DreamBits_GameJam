@@ -4,6 +4,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerAttack : MonoBehaviour
 {
+    
     private bool isAttack;
 
     private bool grounded;
@@ -13,17 +14,27 @@ public class PlayerAttack : MonoBehaviour
     private int countTicks;
     private float cooldownTicks;
 
-    private GameObject projectilePreFab;
+    
 
     private Animator animator;
     private float timerAttack;
     private float cooldownAttack;
     private int damage;
     private Weapon weapon;
+
+    //Data Bullet
+    private GameObject projectilePreFab;
+    public GameObject bulletParent;
+    public int typeTrajectory = 0;
+    public float speedProjectile = 5f;
+    public Vector2 sizeProjectile = new Vector2(0.1f, 0.1f);
+    public float coefficientX = 1;
+    public float coefficientY = 1;
+
     void Start()
     {
         weapon = gameObject.GetComponentInChildren<Weapon>();
-        animator = GetComponent<Animator>();
+        animator = transform.Find("Visual").gameObject.GetComponent<Animator>();
         cooldownAttack = weapon.weaponData.AttackSpeed;
         damage = weapon.weaponData.Damage;
         isMelee = weapon.weaponData.isMelee;
@@ -58,6 +69,33 @@ public class PlayerAttack : MonoBehaviour
         this.grounded = grounded;
     }
 
+    public void ChangeTypeTrajectoryAttack(int TypeTrajectory)
+    {
+        typeTrajectory = TypeTrajectory;
+    }
+
+    public void ChangeCoefficientNearX(float x)
+    {
+        coefficientX = x;
+    }
+    public void ChangeCoefficientNearY(float x)
+    {
+        coefficientY = x;
+    }
+
+    public void ChangeSizeProj(Vector2 vector)
+    {
+        sizeProjectile = vector;
+    }
+
+    public void ChangeCooldown(float cooldown)
+    {
+        cooldownAttack = cooldown;
+    }
+    public void ChangeSpeedProjectile(float speed)
+    {
+        speedProjectile = speed;
+    }
     void Attack()
     {
 
@@ -70,9 +108,17 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("Block");
-                Instantiate(projectilePreFab, transform);
+                animator.SetTrigger("Attack");
+                ProjectileGeometry bullet = Instantiate(projectilePreFab, weapon.transform.position, new Quaternion(0, transform.rotation.y,0, 0), bulletParent.transform).GetComponent<ProjectileGeometry>();
+                bullet.isLeft = GetComponent<PlayerMovement>().isLeft;
+                bullet.owner = gameObject;
+                bullet.typeTrajectory = typeTrajectory;
+                bullet.size = sizeProjectile; 
+                bullet.speed = speedProjectile;
+                bullet.coefficientX = coefficientX;
+                bullet.coefficientY = coefficientY;
             }
+            isAttack = false;
             
         }
     }

@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
     PlayerState playerState;
 
     bool isPlay;
+    public bool isActiveMovement { get; set; }
+    
     // Добавить инвентарь?
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
-        groundChecker = GetComponent<GroundChecker>();
+        groundChecker = GetComponentInChildren<GroundChecker>();
         playerAttack = GetComponent<PlayerAttack>();
         playerInteract = GetComponent<PlayerInteract>();
         playerState = GetComponent<PlayerState>();
@@ -24,7 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isPlay = playerState.Health > 0 ? true : false;
+
+        isPlay = playerState.Health > 0 && isActiveMovement ? true : false;
 
         if (isPlay)
         {
@@ -41,6 +44,8 @@ public class PlayerController : MonoBehaviour
             playerAttack.UpdateInputData(isAttack, isGrounded);
             playerInteract.UpdateInputData(isInteract);
         }
+
+
     }
 
 

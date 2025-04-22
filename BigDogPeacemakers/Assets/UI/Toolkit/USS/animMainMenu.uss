@@ -1,0 +1,8 @@
+.fade-element {
+    opacity: 0;
+    transition: opacity 500ms ease;
+}
+
+.fade-element.enabled {
+    opacity: 1;
+}
