@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8852962421913696348}
   - component: {fileID: 6686992818459125624}
   m_Layer: 0
-  m_Name: UpReload
+  m_Name: ReloadUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusType: 1
-  bonusFloatValue: 1.4
+  bonusFloatValue: 2
   bonusIntValue: 0
   bonusVector2: {x: 0, y: 0}
 --- !u!50 &8852962421913696348

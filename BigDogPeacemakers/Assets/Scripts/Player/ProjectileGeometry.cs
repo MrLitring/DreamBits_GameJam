@@ -40,7 +40,7 @@ public class ProjectileGeometry : MonoBehaviour
         startPoint = transform.position;
         Vector2 targetMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         direction = (targetMouse - startPoint).normalized;
-        
+        transform.localScale = size;
         if (isLeft)
         {
             speed = -speed;
@@ -108,7 +108,7 @@ public class ProjectileGeometry : MonoBehaviour
                 y = coefficientY * Random.Range(-(x * coefficientX), (x * coefficientX));
                 break;
         }
-
+        y = Mathf.Clamp(y, -100, 100);
 
         return y;
     }
