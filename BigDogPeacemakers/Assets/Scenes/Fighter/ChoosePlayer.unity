@@ -394,6 +394,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c1f97dd2cb246e45813d2de35b76564, type: 3}
+--- !u!1 &494568863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8985947408384544890, guid: 5c1f97dd2cb246e45813d2de35b76564, type: 3}
+  m_PrefabInstance: {fileID: 494568862}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &633378265
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +601,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c1f97dd2cb246e45813d2de35b76564, type: 3}
+--- !u!1 &786880224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8985947408384544890, guid: 5c1f97dd2cb246e45813d2de35b76564, type: 3}
+  m_PrefabInstance: {fileID: 786880223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1074594108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6423123545664484834, guid: 7c0b23895008024448f356816c86c5b1, type: 3}
@@ -1022,6 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorsOfSpheres: {fileID: 11400000, guid: 586ac4c5bd178d9409107955f12649da, type: 2}
+  gameManager: {fileID: 11400000, guid: 36365f9e027e0f54b80a67052e918739, type: 2}
 --- !u!1 &1469868128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1064,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   step: 0.1
+  startPos: -5
+  delay: 0
 --- !u!120 &1469868130
 LineRenderer:
   serializedVersion: 2
@@ -1183,6 +1196,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 937251277768111515, guid: e92a2433b5becd34d8ce74add8ebef3c, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 786880224}
+    - target: {fileID: 937251277768111515, guid: e92a2433b5becd34d8ce74add8ebef3c, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 494568863}
     - target: {fileID: 3953869608896972598, guid: e92a2433b5becd34d8ce74add8ebef3c, type: 3}
       propertyPath: m_Name
       value: PlayerManager
@@ -1225,6 +1246,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5079088423703820459, guid: e92a2433b5becd34d8ce74add8ebef3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663378232350792550, guid: e92a2433b5becd34d8ce74add8ebef3c, type: 3}
+      propertyPath: OnOff
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

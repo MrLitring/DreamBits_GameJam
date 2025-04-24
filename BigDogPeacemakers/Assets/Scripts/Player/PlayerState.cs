@@ -6,7 +6,7 @@ using System.Drawing;
 public class PlayerState : MonoBehaviour
 {
     int maxHP = 5;
-    float timerInvincibility;
+    public float timerInvincibility { get; private set; }
     public int Health {  get; private set; }
     public float timeInvincibility {  get; private set; }
 

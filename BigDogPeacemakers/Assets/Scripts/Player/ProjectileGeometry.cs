@@ -45,7 +45,7 @@ public class ProjectileGeometry : MonoBehaviour
         {
             speed = -speed;
         }
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 90f);
     }
 
     // Update is called once per frame
@@ -104,6 +104,12 @@ public class ProjectileGeometry : MonoBehaviour
                 y = coefficientY * Mathf.Sqrt(Mathf.Abs((x * coefficientX))); break;
             case 13:
                 y = coefficientY * Mathf.Atan((x * coefficientX)); break;
+            case 14:
+                y = 0; break;
+            case 15:
+                y = Mathf.Sqrt(Mathf.Abs(4 - x * x)); break;
+            case 16:
+                y = (2/(2 * Mathf.PI)) * Mathf.Cos(30); break;
             default:
                 y = coefficientY * Random.Range(-(x * coefficientX), (x * coefficientX));
                 break;
@@ -115,16 +121,23 @@ public class ProjectileGeometry : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ;
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject != owner)
+        if (collision.gameObject != null)
         {
-
-            collision.GetComponent<PlayerState>().TakeDamage(damage);
-            Destroy(gameObject);
-        }else if (1 << collision.gameObject.layer == LayerMask.GetMask("Ground"))
-        {
-            Destroy(gameObject);
-        }
+            if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject != owner)
+            {
+                PlayerState ps = collision.GetComponent<PlayerState>();
+                if (ps.timerInvincibility<= 0)
+                {
+                    ps.TakeDamage(damage);
+                    Destroy(gameObject);
+                }
+            }
+            else if (1 << collision.gameObject.layer == LayerMask.GetMask("Ground"))
+            {
+                Destroy(gameObject);
+            }
+        }   
+        
         
     }
     

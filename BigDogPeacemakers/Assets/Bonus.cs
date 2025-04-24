@@ -40,6 +40,9 @@ public class Bonus : MonoBehaviour
             case 5:
                 pa.ChangeSpeedProjectile(bonusFloatValue);
                 break;
+            case 6:
+                pa.ChangeTypeTrajectoryAttack(Random.Range(0, 15));
+                break;
         }
     }
 }

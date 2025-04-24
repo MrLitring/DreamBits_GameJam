@@ -14,6 +14,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fighter/FightLevels/Level1.unity
     guid: dd788698c42426845b7b1e9efc4f586b
+  - enabled: 1
+    path: Assets/Scenes/Fighter/FightLevels/Level2.unity
+    guid: 2a04e6e8d2870b743b49726a8836b0a8
+  - enabled: 1
+    path: Assets/Scenes/Fighter/FightLevels/Level3.unity
+    guid: f88de4f226ff2e14daada860905504ff
+  - enabled: 1
+    path: Assets/Scenes/Fighter/FightLevels/Level4.unity
+    guid: 234ad861cde909746add42acc7f1d726
+  - enabled: 1
+    path: Assets/Scenes/Fighter/FightLevels/Level5.unity
+    guid: 8527c0a9fd335554d8ff8172f35de15f
+  - enabled: 1
+    path: Assets/Scenes/Fighter/FightLevels/Level6.unity
+    guid: 05f3b139a23a2d9418d410926e678999
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

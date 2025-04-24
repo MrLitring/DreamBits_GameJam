@@ -2,17 +2,19 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI.MessageBox;
 
 public class UIChoosePlayer : MonoBehaviour
 {
     public ColorsOfSpheres colorsOfSpheres;
+    public GameManager gameManager;
     UIDocument uiDocument;
     VisualElement root;
     Camera mainCamera;
     List<GameObject> players;
     List<PlayerInputHandler> inputHandlers;
     List<Label> labels;
-   
+    SliderInt sliderInt;
 
     void Start()
     {
@@ -29,8 +31,9 @@ public class UIChoosePlayer : MonoBehaviour
     void CreateUI()
     {
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        root.style.flexDirection = FlexDirection.Row;
-        root.style.justifyContent = Justify.Center;
+        root.style.flexDirection = FlexDirection.Column;
+        root.style.justifyContent = Justify.FlexStart;
+        root.style.alignItems = Align.Center;
         Label title = new Label();
         title.text = "Нажмите Enter, чтобы продолжить";
         title.style.position = Position.Relative;
@@ -39,13 +42,28 @@ public class UIChoosePlayer : MonoBehaviour
         title.style.color = UnityEngine.Color.white;
         title.style.unityFontStyleAndWeight = UnityEngine.FontStyle.Bold;
         
+        sliderInt = new SliderInt();
+
+        sliderInt.value = 5;
+        sliderInt.lowValue = 1;
+        sliderInt.highValue = 10;
+        sliderInt.label = "Выберите количество очков для победы: " + sliderInt.value;
+        sliderInt.style.width = Length.Percent(30);
+        sliderInt.style.position = Position.Relative;
+        sliderInt.style.color = UnityEngine.Color.white;
+        sliderInt.style.unityFontStyleAndWeight = UnityEngine.FontStyle.Bold;
+        sliderInt.RegisterValueChangedCallback(ChangeSliderValue);
 
         root.Add(title);
+        root.Add(sliderInt);
+
+
+
 
         foreach (var p in players)
         {
             Label label = new Label();
-            label.text = "Нажмите Вправо/Влево для смены цвета";
+            label.text = "Нажмите Вниз для смены цвета";
             label.style.position = Position.Absolute;
             Vector2 dot = mainCamera.WorldToScreenPoint(p.transform.position);
 
@@ -72,16 +90,28 @@ public class UIChoosePlayer : MonoBehaviour
         }
     }
 
+    void ChangeSliderValue(ChangeEvent<int> evt)
+    {
+        sliderInt.label = "Выберите количество очков для победы: " + sliderInt.value;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            gameManager.ScoresPlayer1 = 0;
+            gameManager.ScoresPlayer2 = 0;
+            gameManager.ScoresToWin = sliderInt.value;
+            SceneManager.LoadScene(Random.Range(2,7));
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
         }
         for (int i = 0; i < inputHandlers.Count; i++)
         {
-            float x = inputHandlers[i].GetMove().x;
-            if (x > 0)
+            float y = inputHandlers[i].GetMove().y;
+            /*if (y > 0)
             {
                 PlayerData pd = players[i].GetComponent<PlayerData>();
                 int indCol = colorsOfSpheres.colors.IndexOf(pd.SphereColor);
@@ -96,8 +126,8 @@ public class UIChoosePlayer : MonoBehaviour
                     ChangeLabelColor(labels[i], colorsOfSpheres.colors[0]);
                 }
 
-            }
-            else if (x < 0)
+            }*/
+            if (y < 0)
             {
                 PlayerData pd = players[i].GetComponent<PlayerData>();
                 int indCol = colorsOfSpheres.colors.IndexOf(pd.SphereColor);

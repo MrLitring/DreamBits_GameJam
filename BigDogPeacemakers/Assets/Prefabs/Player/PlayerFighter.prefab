@@ -1291,7 +1291,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.39348304, y: -1.8469616}
+  m_Offset: {x: -0.38547468, y: -1.8469616}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1301,7 +1301,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.3212106, y: 0.14879155}
+  m_Size: {x: 1.388484, y: 0.14879155}
   m_EdgeRadius: 0
 --- !u!114 &3523306950530928373
 MonoBehaviour:
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletParent: {fileID: 0}
-  typeTrajectory: 0
+  typeTrajectory: 14
   speedProjectile: 5
   sizeProjectile: {x: 0.1, y: 0.1}
   coefficientX: 1
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 500
-  jumpForce: 35
+  jumpForce: 40
 --- !u!114 &2034676752615998677
 MonoBehaviour:
   m_ObjectHideFlags: 0
