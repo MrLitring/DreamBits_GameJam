@@ -5,6 +5,8 @@ public class ControlTips : MonoBehaviour
 {
     UIDocument uiDocument;
     VisualElement root;
+    VisualElement tipsContainer;
+    
     VisualElement player1Tip;
     VisualElement player2Tip;
 
@@ -17,7 +19,13 @@ public class ControlTips : MonoBehaviour
     }
     void CreateUI()
     {
+        root.style.flexDirection = FlexDirection.Column;
+        root.style.justifyContent = Justify.FlexEnd;
 
+        tipsContainer = new VisualElement();
+        tipsContainer.style.flexDirection = FlexDirection.Row;
+        tipsContainer.style.justifyContent = Justify.SpaceAround;
+        
 
         player1Tip = new VisualElement();
         player1Tip.style.position = Position.Absolute;
@@ -27,7 +35,7 @@ public class ControlTips : MonoBehaviour
         player1Tip.style.height = Length.Percent(10);
 
         Label labelTip1 = new Label();
-        labelTip1.text = "Передвижение - W D\nАтака - H\nПрыжок - Space";
+        labelTip1.text = "Клавиатура WASD:\nПередвижение - W D\nАтака - H\nПрыжок - Space";
         labelTip1.style.color = Color.white;
         labelTip1.style.fontSize = 20;
 
@@ -42,22 +50,36 @@ public class ControlTips : MonoBehaviour
         player2Tip.style.height = Length.Percent(10);
 
         Label labelTip2 = new Label();
-        labelTip2.text = "Передвижение - Стрелка Влево и стрелка Вправо \nАтака - Enter/Левая кнопка мыши\nПрыжок - Стрелка Вверх";
+        labelTip2.text = "Геймпад:\nПередвижение - Левый стик \nАтака - Х\nПрыжок - R1";
         labelTip2.style.color = Color.white;
         labelTip2.style.fontSize = 20;
         //labelTip2.style.width = Length.Percent(30);
         //labelTip2.style.height = Length.Percent(10);
 
 
-        
 
-        root.Add(player1Tip);
-        root.Add(player2Tip);
-        player1Tip.Add(labelTip1);
-        player2Tip.Add(labelTip2);
+        Label labelTip3 = new Label();
+        labelTip3.text = "Клавиатура Стрелки:\nПередвижение - Стрелка влево Стрелка вправо \nАтака - NumPeriod(.)\nПрыжок - Num0";
+        labelTip3.style.color = Color.white;
+        labelTip3.style.fontSize = 20;
 
-        player1Tip.style.visibility = Visibility.Hidden;
-        player2Tip.style.visibility = Visibility.Hidden;
+
+
+        //root.Add(player1Tip);
+        //root.Add(player2Tip);
+        //player1Tip.Add(labelTip1);
+        //player2Tip.Add(labelTip2);
+
+        //player1Tip.style.visibility = Visibility.Hidden;
+        //player2Tip.style.visibility = Visibility.Hidden;
+
+        root.Add(tipsContainer);
+        tipsContainer.Add(labelTip1);
+        tipsContainer.Add(labelTip2);
+        tipsContainer.Add(labelTip3);
+
+        tipsContainer.style.visibility = Visibility.Hidden;
+
 
         Label staticTip = new Label();
         staticTip.text = "I - управление\nEsc - выйти в меню";
@@ -65,6 +87,9 @@ public class ControlTips : MonoBehaviour
         staticTip.style.fontSize = 20;
         staticTip.style.width = Length.Percent(30);
         staticTip.style.height = Length.Percent(10);
+        staticTip.style.position = Position.Absolute;
+        staticTip.style.left = 10;
+        staticTip.style.top = 10;
         root.Add(staticTip);
 
     }
@@ -73,11 +98,21 @@ public class ControlTips : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.I))
         {
-            player1Tip.style.visibility = player1Tip.style.visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
-            player2Tip.style.visibility = player2Tip.style.visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            tipsContainer.style.visibility = tipsContainer.style.visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            //player1Tip.style.visibility = player1Tip.style.visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
+            //player2Tip.style.visibility = player2Tip.style.visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
+            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.CompareTag("Player"))
+                {
+                    Destroy(obj);
+                }
+            }
             SceneManager.LoadScene(0);
         }
 

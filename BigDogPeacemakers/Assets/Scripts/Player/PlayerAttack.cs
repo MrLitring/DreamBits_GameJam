@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -24,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
 
     //Data Bullet
     private GameObject projectilePreFab;
-    public GameObject bulletParent;
+    GameObject bulletParent;
     public int typeTrajectory = 0;
     public float speedProjectile = 5f;
     public Vector2 sizeProjectile = new Vector2(0.1f, 0.1f);
@@ -34,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         weapon = gameObject.GetComponentInChildren<Weapon>();
-        animator = transform.Find("Visual").gameObject.GetComponent<Animator>();
+        animator = animator = transform.Find("VisContainer").gameObject.GetComponentInChildren<Animator>();
         cooldownAttack = weapon.weaponData.AttackSpeed;
         damage = weapon.weaponData.Damage;
         isMelee = weapon.weaponData.isMelee;
@@ -53,9 +54,24 @@ public class PlayerAttack : MonoBehaviour
         }
         
         timerAttack = 0;
+
+       
     }
 
-    
+    private void OnEnable()
+    {
+        weapon = gameObject.GetComponentInChildren<Weapon>();
+    }
+
+    public void UpdateAnimator()
+    {
+        animator = animator = transform.Find("VisContainer").gameObject.GetComponentInChildren<Animator>();
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        bulletParent = GameObject.FindGameObjectWithTag("SpawnBullets");
+    }
     void FixedUpdate()
     {
         Attack();
@@ -76,11 +92,11 @@ public class PlayerAttack : MonoBehaviour
 
     public void ChangeCoefficientNearX(float x)
     {
-        coefficientX = x;
+        coefficientX += x;
     }
-    public void ChangeCoefficientNearY(float x)
+    public void ChangeCoefficientNearY(float y)
     {
-        coefficientY = x;
+        coefficientY += y;
     }
 
     public void ChangeSizeProj(Vector2 vector)
@@ -108,15 +124,39 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("Attack");
-                ProjectileGeometry bullet = Instantiate(projectilePreFab, weapon.transform.position, new Quaternion(0, transform.rotation.y,0, 0), bulletParent.transform).GetComponent<ProjectileGeometry>();
-                bullet.isLeft = GetComponent<PlayerMovement>().isLeft;
-                bullet.owner = gameObject;
-                bullet.typeTrajectory = typeTrajectory;
-                bullet.size = sizeProjectile; 
-                bullet.speed = speedProjectile;
-                bullet.coefficientX = coefficientX;
-                bullet.coefficientY = coefficientY;
+                try
+                {
+                    animator.SetTrigger("Attack");
+                }
+                catch
+                {
+                    UpdateAnimator();
+                }
+                
+
+                
+                try
+                {
+                    ProjectileGeometry bullet;
+                    //bullet = Instantiate(projectilePreFab, weapon.transform.position, new Quaternion(0, transform.rotation.y, 0, 0), bulletParent.transform).GetComponent<ProjectileGeometry>();
+                    bullet = Instantiate(projectilePreFab, weapon.transform.position, new Quaternion(0, transform.rotation.y, 0, 0)).GetComponent<ProjectileGeometry>();
+                    bool isleft = GetComponent<PlayerMovementLocal>().isLeft;
+                    bullet.isLeft = isleft;
+
+                    bullet.owner = gameObject;
+                    bullet.typeTrajectory = typeTrajectory;
+                    bullet.size = sizeProjectile;
+                    bullet.speed = speedProjectile;
+                    bullet.coefficientX = coefficientX;
+                    bullet.coefficientY = coefficientY;
+                    DontDestroyOnLoad(bullet);
+                }
+                catch(Exception ex)
+                {
+                    Debug.LogError(ex.Message);
+                }
+                
+                
             }
             isAttack = false;
             

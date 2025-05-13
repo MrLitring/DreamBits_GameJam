@@ -37,7 +37,7 @@ public class SpawnerBonus : MonoBehaviour
     {
         if (bonus.Count > 1)
         {
-            currentBonus = GameObject.Instantiate(bonus[Random.Range(0, bonus.Count - 1)], transform);
+            currentBonus = GameObject.Instantiate(bonus[Random.Range(0, bonus.Count)], transform);
         }
         else
         {

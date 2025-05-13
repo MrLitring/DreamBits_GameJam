@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 611311241376032602}
   - component: {fileID: -6215946859557452024}
   - component: {fileID: 3768715424277981245}
+  - component: {fileID: 4360591720707014210}
   m_Layer: 0
-  m_Name: ProjectileGeometry1
-  m_TagString: Untagged
+  m_Name: ProjectileGeometry
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +148,7 @@ MonoBehaviour:
   heightFactor: 2
   typeTrajectory: 0
   isLeft: 0
-  owner: {fileID: 0}
+  owner: {fileID: 3576039488452765291, guid: 2a4cbbfa6ad8aa64f9df41adfd6a8460, type: 3}
   size: {x: 0, y: 0}
   speed: 1
   coefficientY: 0
@@ -244,3 +245,28 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4360591720707014210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467545418419106424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2254663251
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0

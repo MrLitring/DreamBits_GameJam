@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3665cf587c337f44b99f8e1855072530, type: 3}
   m_Name: GameManager
   m_EditorClassIdentifier: 
-  ScoresPlayer1: 4
-  ScoresPlayer2: 0
-  ScoresToWin: 3
+  ScoresPlayers: 000000000000000000000000
+  ScoresToWin: 5

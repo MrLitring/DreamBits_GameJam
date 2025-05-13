@@ -14,13 +14,16 @@ public class PlayerState : MonoBehaviour
     List<SpriteRenderer> visualObjects;
     List<MaterialPropertyBlock> materialProperties;
 
-    void Start()
+    GameControllerLocal gameControllerLocal;
+
+    void Awake()
     {
         Health = maxHP;
         timeInvincibility = 1f;
         timerInvincibility = 0f;
-        Transform visual = transform.Find("Visual");
-        animator = visual.gameObject.GetComponent<Animator>();
+        animator = transform.Find("VisContainer").gameObject.GetComponentInChildren<Animator>();
+        Transform visual = animator.transform;
+        
         visualObjects = new List<SpriteRenderer>();
         materialProperties = new List<MaterialPropertyBlock>();
         for (int i = 0; i < visual.childCount; i++)
@@ -36,11 +39,42 @@ public class PlayerState : MonoBehaviour
         }
     }
 
+    public void UpdateAnimator()
+    {
+        animator = transform.Find("VisContainer").gameObject.GetComponentInChildren<Animator>();
+        Transform visual = animator.transform;
+
+        visualObjects = new List<SpriteRenderer>();
+        materialProperties = new List<MaterialPropertyBlock>();
+        for (int i = 0; i < visual.childCount; i++)
+        {
+            SpriteRenderer sr = visual.GetChild(i).GetComponent<SpriteRenderer>();
+
+            visualObjects.Add(sr);
+
+            var mpb = new MaterialPropertyBlock();
+            mpb.SetColor("_Color", sr.color);
+            sr.SetPropertyBlock(mpb);
+            materialProperties.Add(mpb);
+        }
+    }
+
+   
+    
+
     public void Update()
     {
         if (timerInvincibility > 0f) timerInvincibility -= Time.deltaTime;
         PlayInvincibilityAnim();
-        foreach (var item in visualObjects) item.color = item.color;
+        try
+        {
+            foreach (var item in visualObjects) item.color = item.color;
+        }
+        catch
+        {
+            UpdateAnimator();
+        }
+        
     }
 
     public void TakeDamage(int damage)
@@ -51,7 +85,11 @@ public class PlayerState : MonoBehaviour
             print("Health = " + Health);
             timerInvincibility = timeInvincibility;
             PaintRed();
-            if (Health <= 0) PlayDeathAnim();
+
+            if (Health <= 0)
+            {
+                StartCoroutine(PlayDeathAnim());   
+            }
         }
     }
      public void HealHealth(int heal)
@@ -62,11 +100,12 @@ public class PlayerState : MonoBehaviour
         
     }
 
-    void PlayDeathAnim()
+    IEnumerator PlayDeathAnim()
     {
         animator.SetTrigger("Death");
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
         
-        Destroy(gameObject, 1f);
     }
 
     void PlayInvincibilityAnim()
@@ -82,12 +121,20 @@ public class PlayerState : MonoBehaviour
 
     void PaintRed()
     {
-        for(int i = 0; i < visualObjects.Count; i++) 
+        try
         {
-            visualObjects[i].GetPropertyBlock(materialProperties[i]);
-            materialProperties[i].SetColor("_Color", new UnityEngine.Color(visualObjects[i].color.r * 255 - 255 * 0.2f, visualObjects[i].color.g, visualObjects[i].color.b, 1));
-            visualObjects[i].SetPropertyBlock(materialProperties[i]);
+            for (int i = 0; i < visualObjects.Count; i++)
+            {
+                visualObjects[i].GetPropertyBlock(materialProperties[i]);
+                materialProperties[i].SetColor("_Color", new UnityEngine.Color(visualObjects[i].color.r * 255 - 255 * 0.2f, visualObjects[i].color.g, visualObjects[i].color.b, 1));
+                visualObjects[i].SetPropertyBlock(materialProperties[i]);
+            }
         }
+        catch
+        {
+            UpdateAnimator();
+        }
+        
         
     }
 

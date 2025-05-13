@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonusType: 3
-  bonusFloatValue: 0.5
+  bonusFloatValue: -0.5
   bonusIntValue: 0
   bonusVector2: {x: 0, y: 0}
 --- !u!50 &5403209082329401718

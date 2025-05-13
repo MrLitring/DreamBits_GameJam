@@ -3,12 +3,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Unity.Netcode;
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
     public GameManager manager;
-    public GameObject player1;
-    public GameObject player2;
+    public GameObject[] playersSpawnPoint;
+    
     bool stopper = false;
     bool winGame = false;
     PlayerSwitcher playerSwitcher;
@@ -24,17 +25,42 @@ public class GameController : MonoBehaviour
         root = uiDocument.rootVisualElement;
         root.style.justifyContent = Justify.FlexStart;
         root.style.alignItems = Align.Center;
-        name1 = player1.name;
-        name2 = player2.name;
+        //name1 = player1.name;
+        //name2 = player2.name;
 
     }
 
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            MovePlayersOnSpawnPointServerRpc();
+        }
+        
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void MovePlayersOnSpawnPointServerRpc()
+    {
+        MovePlayersOnSpawnPointClientRpc();
+    }
     
+    [ClientRpc]
+    void MovePlayersOnSpawnPointClientRpc()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].transform.position = playersSpawnPoint[i].transform.position;
+        }
+    }
     void Update()
     {
+        /*
         if(player1.IsDestroyed() && !stopper){
             print("Player1 is Died");
-            manager.ScoresPlayer2 += 1;
+            //manager.ScoresPlayer2 += 1;
             DisableControl();
             WinOrContinue();
             stopper = true;
@@ -42,7 +68,7 @@ public class GameController : MonoBehaviour
         if (player2.IsDestroyed() && !stopper)
         {
             print("Player2 is Died");
-            manager.ScoresPlayer1 += 1;
+            //manager.ScoresPlayer1 += 1;
             DisableControl();
             WinOrContinue();
             stopper = true;
@@ -54,15 +80,17 @@ public class GameController : MonoBehaviour
                 NextScene();
             }
         }
+        */
     }
 
     void DisableControl()
     {
         playerSwitcher.SwitchState(false);
     }
-
+    
     void WinOrContinue()
     {
+        /*
         if (manager.ScoresPlayer1 >= manager.ScoresToWin || manager.ScoresPlayer2 >= manager.ScoresToWin)
         {
             winGame = true;
@@ -72,6 +100,7 @@ public class GameController : MonoBehaviour
         {
             ShowUI();
         }
+        */
     }
 
     void NextScene()
@@ -89,6 +118,7 @@ public class GameController : MonoBehaviour
 
     void ShowUI()
     {
+        /*
         if (winGame)
         {
             Label labelResults = new Label();
@@ -112,5 +142,6 @@ public class GameController : MonoBehaviour
         labelTip.style.fontSize = 40;
         labelTip.style.color = UnityEngine.Color.white;
         root.Add(labelTip);
+        */
     }
 }

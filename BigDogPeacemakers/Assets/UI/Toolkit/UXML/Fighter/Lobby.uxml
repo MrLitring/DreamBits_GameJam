@@ -1,0 +1,27 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Toolkit/USS/gray_theme.uss?fileID=7433441132597879392&amp;guid=847fa82deb5d48e4abc08fcf664bb4be&amp;type=3#gray_theme" />
+    <Style src="project://database/Assets/UI/Toolkit/USS/ready_button.uss?fileID=7433441132597879392&amp;guid=759a91659c11943438b33b4b9a96919c&amp;type=3#ready_button" />
+    <engine:VisualElement name="container" style="flex-grow: 1;">
+        <engine:VisualElement name="main_zone" class="container" style="flex-grow: 1;">
+            <engine:VisualElement name="code_zone" class="container" style="flex-grow: 0; flex-direction: row; flex-shrink: 0; border-top-left-radius: 40px; border-top-right-radius: 40px; border-bottom-right-radius: 40px; border-bottom-left-radius: 40px;">
+                <engine:Label text="Код для подключения:" name="label_code" />
+                <engine:Label text="____" name="label_text_code" />
+            </engine:VisualElement>
+            <engine:VisualElement name="players_and_settings_zone" style="flex-grow: 1; flex-direction: row;">
+                <engine:VisualElement name="players_zone" class="container" style="flex-grow: 1; margin-bottom: 0;">
+                    <engine:Label text="Игроки:" name="label_players_head" />
+                    <engine:VisualElement name="players_list" style="flex-grow: 1;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="settings_and_buttons" style="flex-grow: 1;">
+                    <engine:VisualElement name="settings" class="container" style="flex-grow: 1;">
+                        <engine:Label text="Настройки" name="label_settings_head" />
+                        <engine:VisualElement name="settings_list" style="flex-grow: 1;" />
+                    </engine:VisualElement>
+                    <engine:VisualElement name="buttons" style="flex-grow: 0; flex-shrink: 0;">
+                        <engine:Button text="Не готов" name="button_ready" class="button_Off" />
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

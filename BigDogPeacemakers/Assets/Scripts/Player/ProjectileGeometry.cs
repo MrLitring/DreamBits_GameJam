@@ -1,12 +1,9 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 //using System.Linq.Dynamic.Core;
 
 public class ProjectileGeometry : MonoBehaviour
 {
-
-    
-
-
     float x0;
     float y0;
     public int damage;
@@ -15,17 +12,11 @@ public class ProjectileGeometry : MonoBehaviour
     public float range;
     public string formula;
 
-
-
-    
     public float heightFactor = 2f; // Чем больше — тем выше дуга
     private Vector2 startPoint;
     private Vector2 direction; // Нормализованное направление
     private float distanceTravelled = 0;
     
-
-
-
     //Input Data
     public int typeTrajectory;
     public bool isLeft;
@@ -123,10 +114,10 @@ public class ProjectileGeometry : MonoBehaviour
     {
         if (collision.gameObject != null)
         {
-            if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject != owner)
+            if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject != owner && collision.gameObject.CompareTag("Player"))
             {
                 PlayerState ps = collision.GetComponent<PlayerState>();
-                if (ps.timerInvincibility<= 0)
+                if ( ps != null && ps.timerInvincibility<= 0 )
                 {
                     ps.TakeDamage(damage);
                     Destroy(gameObject);

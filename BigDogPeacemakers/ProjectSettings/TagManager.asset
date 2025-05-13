@@ -7,6 +7,10 @@ TagManager:
   - Enemy
   - Ground
   - Interactive
+  - SpawnPlace
+  - SpawnBullets
+  - InnerObj
+  - Bullet
   layers:
   - Default
   - TransparentFX

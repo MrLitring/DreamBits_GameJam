@@ -10,7 +10,7 @@ public class Bonus : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player"))
+        if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject.CompareTag("Player"))
         {
             Interaction(collision);
             Destroy(gameObject);
@@ -20,6 +20,7 @@ public class Bonus : MonoBehaviour
     void Interaction(Collider2D collision)
     {
         PlayerAttack pa = collision.gameObject.GetComponent<PlayerAttack>();
+        if (pa == null) { print("PlayerAttack is Null"); }
         switch(bonusType)
         {
             case 0:

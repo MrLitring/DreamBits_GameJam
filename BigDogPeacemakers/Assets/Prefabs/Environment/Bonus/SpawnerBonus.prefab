@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177ccc3f3431b7d41927aed0e4733b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonus: {fileID: 0}
+  bonus:
+  - {fileID: 0}
   cooldown: 5

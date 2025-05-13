@@ -11,14 +11,15 @@ public class PlayerSwitcher : MonoBehaviour
 
         foreach (GameObject p in players)
         {
-            p.GetComponent<PlayerController>().isActiveMovement = OnOff;
+            p.GetComponent<PlayerControllerLocal>().isActiveMovement = OnOff;
         }
     }
     public void SwitchState(bool state)
     {
+        players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
         foreach (GameObject p in players)
         {
-            if (p != null) p.GetComponent<PlayerController>().isActiveMovement = state;
+            if (p != null) p.GetComponent<PlayerControllerLocal>().isActiveMovement = state;
         }
     }
     
