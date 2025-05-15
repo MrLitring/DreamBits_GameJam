@@ -26,13 +26,13 @@ public class HUDController : MonoBehaviour
         rootHUD = uiDocumentHUD.rootVisualElement;
         container = rootHUD.Q<VisualElement>("container");
         heartVE = heartVTA.Instantiate(); //.rootVisualElement.Q<VisualElement>("heart");
-        heartsCount = playerState.Health;
+        heartsCount = (int)playerState.Health;
     }
 
     // Update is called once per frame
     void Update()
     {
-        heartsCount = playerState.Health;
+        heartsCount = (int)playerState.Health;
         UpdateHeartsCount();
     }
 

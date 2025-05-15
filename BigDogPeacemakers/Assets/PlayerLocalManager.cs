@@ -156,10 +156,12 @@ public class PlayerLocalManager : MonoBehaviour
         {
             go = Instantiate(player, (Vector3)(new Vector2(-(startPos.x - distanceBetweenX * (gameObjects.Count - 1)), startPos.y)), new Quaternion(Quaternion.identity.x, 180, Quaternion.identity.z, Quaternion.identity.w));     
         }
-        print("Controll = " + TypeControl);
+        
         go.GetComponent<PlayerInputHandler>().typeController = TypeControl;
         go.GetComponent<PlayerControllerLocal>().Id = gameObjects.Count;
 
+        print("Control = " + TypeControl);
+        print("Id = " + go.GetComponent<PlayerControllerLocal>().Id);
         gameObjects.Add(go);
     }
     

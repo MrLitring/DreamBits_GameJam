@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 
 public class GameControllerLocal : MonoBehaviour
@@ -38,6 +39,7 @@ public class GameControllerLocal : MonoBehaviour
 
     void MovePlayersOnSpawnPoint()
     {
+        stopper = false;
         GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include,FindObjectsSortMode.None);
         players = new List<GameObject>();
 
@@ -110,43 +112,17 @@ public class GameControllerLocal : MonoBehaviour
     public void ReculcScores()
     {
         if (players is null) return;
-        /*
-        print("Количество игроков" + players.Count);
-        activePlayers = players.Count;
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (!players[i].activeInHierarchy && !stopper)
-            {
-                activePlayers--;
-                for (int j = 0; j < manager.ScoresPlayers.Count; j++)
-                {
-                    if (i == j)
-                    {
-                        manager.ScoresPlayers[j] -= 1;
-                    }
-                }
-                print("Active Players - " + activePlayers);
-                
-            }
-        }*/
-        activePlayers = players.Count;
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (!players[i].activeInHierarchy && !stopper)
-            {
-                activePlayers--;
-            }
-        }
-        if (activePlayers <= 1)
+
+        if (activePlayers == 1)
         {
             DisableControl();
-            
-            foreach(var key in manager.ScoresPlayers.Keys.ToList())
+
+            foreach (var key in manager.ScoresPlayers.Keys.ToList())
             {
                 manager.ScoresPlayers[key] += 1;
             }
 
-            
+
             WinOrContinue();
             stopper = true;
         }
@@ -155,9 +131,13 @@ public class GameControllerLocal : MonoBehaviour
 
     public void DecreaseScore(int id)
     {
-        manager.ScoresPlayers[id] -= 1;
-        print($"Игрок с ID {id} потерял 1 очко. Текущее количество {manager.ScoresPlayers[id]}");
-        ReculcScores();
+        if (stopper == false)
+        {
+            manager.ScoresPlayers[id] -= 1;
+            activePlayers -= 1;
+            print($"Игрок с ID {id} потерял 1 очко. Текущее количество {manager.ScoresPlayers[id]}");
+            ReculcScores();
+        }
     }
 
     void DisableControl()
@@ -172,15 +152,9 @@ public class GameControllerLocal : MonoBehaviour
 
     void WinOrContinue()
     {
-        for (int i = 0; i < manager.ScoresPlayers.Count; i++)
-        {
-            if (manager.ScoresPlayers[i] >= manager.ScoresToWin)
-            {
-                winGame = true;
-                ShowUI();
-                return;
-            }
-        }
+        if (isMaxScore(manager.ScoresToWin, out _))
+            winGame = true;
+
         ShowUI();
     }
 
@@ -209,37 +183,17 @@ public class GameControllerLocal : MonoBehaviour
 
     void ShowUI()
     {
-        
+
         if (winGame)
         {
 
-            string winner = "";
-            for (int i = 0; i < manager.ScoresPlayers.Count; i++)
-            {
-                if (manager.ScoresPlayers[i] >= manager.ScoresToWin)
-                {
-                    winner = "Player" + players[i].GetComponent<PlayerControllerLocal>().Id;
-                    break;
-                }
+            isMaxScore(manager.ScoresToWin, out int playerIndex);
+            string winner = "Player" + players[playerIndex].GetComponent<PlayerControllerLocal>().Id;
 
-            }
-
-            Label labelResults = new Label();
-            
-            labelResults.text = $"{winner} is WINNER";
-            labelResults.style.fontSize = 60;
-            labelResults.style.color = UnityEngine.Color.white;
+            Label labelResults = LabelResult($"{winner} is WINNER", 60);
             root.Add(labelResults);
 
-            GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-            foreach (GameObject obj in allObjects)
-            {
-                if (obj.CompareTag("Player") || obj.CompareTag("Bullet"))
-                {
-                    Destroy(obj);
-                }
-            }
+            ObjDestroy();
 
         }
         else
@@ -248,20 +202,55 @@ public class GameControllerLocal : MonoBehaviour
             container.style.flexDirection = FlexDirection.Column;
             for (int i = 0; i < manager.ScoresPlayers.Count; i++)
             {
-                Label labelResults = new Label();
-                labelResults.text = $"{"Player" + players[i].GetComponent<PlayerControllerLocal>().Id} - {manager.ScoresPlayers[players[i].GetComponent<PlayerControllerLocal>().Id]}";
-                labelResults.style.fontSize = 40;
-                labelResults.style.color = UnityEngine.Color.white;
+                Label labelResults = LabelResult($"{"Player" + players[i].GetComponent<PlayerControllerLocal>().Id} - {manager.ScoresPlayers[players[i].GetComponent<PlayerControllerLocal>().Id]}", 40);
                 container.Add(labelResults);
             }
             root.Add(container);
         }
-        
-        Label labelTip = new Label();
-        labelTip.text = $"Нажмите Enter для продолжения";
-        labelTip.style.fontSize = 40;
-        labelTip.style.color = UnityEngine.Color.white;
+
+        Label labelTip = LabelResult("Нажмите Enter для продолжения");
         root.Add(labelTip);
-        
+
     }
+
+    private Label LabelResult(string content, int size = 40)
+    {
+        Label label = new Label();
+        label.text = content;
+        label.style.color = UnityEngine.Color.white;
+        label.style.fontSize = size;
+
+        return label;
+    }
+
+
+    private bool isMaxScore(int value, out int playerIndex)
+    {
+        for (int i = 0; i < manager.ScoresPlayers.Count; i++)
+        {
+            if (manager.ScoresPlayers[i] >= manager.ScoresToWin)
+            {
+                playerIndex = i;
+                return true;
+            }
+        }
+
+        playerIndex = -1;
+        return false;
+    }
+
+    private void ObjDestroy()
+    {
+        GameObject[] allObjects = Object.FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag("Player") || obj.CompareTag("Bullet"))
+            {
+                Destroy(obj);
+            }
+        }
+    }
+
+
 }

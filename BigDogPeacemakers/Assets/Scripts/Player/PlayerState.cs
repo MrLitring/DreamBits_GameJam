@@ -7,7 +7,7 @@ public class PlayerState : MonoBehaviour
 {
     int maxHP = 5;
     public float timerInvincibility { get; private set; }
-    public int Health {  get; private set; }
+    public float Health {  get; private set; }
     public float timeInvincibility {  get; private set; }
 
     Animator animator;
@@ -77,7 +77,7 @@ public class PlayerState : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (timerInvincibility <= 0f)
         {
