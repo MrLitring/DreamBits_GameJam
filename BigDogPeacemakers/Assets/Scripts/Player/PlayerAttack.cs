@@ -20,6 +20,12 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private float timerAttack;
     private float cooldownAttack;
+
+    private float timerReload = 0;
+    private float cooldownReload = 4;
+    private float magazineCapacity = 4;
+    private float shotBullets = 0;
+
     private int damage;
     private Weapon weapon;
 
@@ -76,6 +82,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Attack();
         if (timerAttack > 0) timerAttack -= Time.deltaTime;
+        if (timerReload > 0) timerReload -= Time.deltaTime;
     }
 
     
@@ -115,7 +122,7 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
 
-        if (isAttack && timerAttack <= 0)
+        if (isAttack && timerAttack <= 0 && timerReload <= 0)
         {
             timerAttack = cooldownAttack;
             if (isMelee)
@@ -150,6 +157,14 @@ public class PlayerAttack : MonoBehaviour
                     bullet.coefficientX = coefficientX;
                     bullet.coefficientY = coefficientY;
                     DontDestroyOnLoad(bullet);
+
+                    shotBullets += 1;
+
+                    if (shotBullets >= magazineCapacity)
+                    {
+                        shotBullets = 0;
+                        timerReload = cooldownReload;
+                    }
                 }
                 catch(Exception ex)
                 {

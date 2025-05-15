@@ -1,8 +1,6 @@
-п»їusing Unity.VisualScripting;
 using UnityEngine;
 
-
-public class ProjectileGeometry : MonoBehaviour
+public class ProjectileFree : MonoBehaviour
 {
     float x0;
     float y0;
@@ -12,11 +10,11 @@ public class ProjectileGeometry : MonoBehaviour
     public float range;
     public string formula;
 
-    public float heightFactor = 2f; // Р§РµРј Р±РѕР»СЊС€Рµ вЂ” С‚РµРј РІС‹С€Рµ РґСѓРіР°
+    public float heightFactor = 2f; // Чем больше — тем выше дуга
     private Vector2 startPoint;
-    private Vector2 direction; // РќРѕСЂРјР°Р»РёР·РѕРІР°РЅРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ
+ // Нормализованное направление
     private float distanceTravelled = 0;
-    
+
     //Input Data
     public int typeTrajectory;
     public bool isLeft;
@@ -26,37 +24,33 @@ public class ProjectileGeometry : MonoBehaviour
     public float coefficientY;
     public float coefficientX;
 
+    public Vector2 direction;
+    public Vector2 targetPos;
+
+    Rigidbody2D rb;
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         startPoint = transform.position;
         Vector2 targetMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = (targetMouse - startPoint).normalized;
+        direction = (targetPos - startPoint).normalized;
+
+        
         transform.localScale = size;
-        if (isLeft)
-        {
-            speed = -speed;
-        }
         Destroy(gameObject, 90f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isLeft)
-        {
-            speed = -Mathf.Abs(speed);
-        }
-        distanceTravelled += speed * Time.deltaTime;
-        float x;
+        Vector2 angle = new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.rotation.eulerAngles.z), Mathf.Sin(Mathf.Deg2Rad * transform.rotation.eulerAngles.z));
+
         
-        x = distanceTravelled;
-        //float y = Mathf.Pow((x), 2);
-        float y = CalculateY(x);
-        Vector2 localOffset = new Vector2(x, y);
-
-        transform.position = startPoint + localOffset;// rotated;
-
+        rb.linearVelocity = angle * speed * Time.deltaTime;
+        
     }
+
     
 
     float CalculateY(float x)
@@ -78,11 +72,11 @@ public class ProjectileGeometry : MonoBehaviour
                 y = coefficientY * Mathf.Pow(0.5f, (x * coefficientX));
                 break;
             case 5:
-                y = coefficientY * (- (x * coefficientX)); break;
+                y = coefficientY * (-(x * coefficientX)); break;
             case 6:
                 y = -((x * coefficientX) * (x * coefficientX)); break;
             case 7:
-                y = coefficientY *  0.5f * Mathf.Pow(2, (x * coefficientX)); break;
+                y = coefficientY * 0.5f * Mathf.Pow(2, (x * coefficientX)); break;
             case 8:
                 y = coefficientY * Mathf.Sin((x * coefficientX)); break;
             case 9:
@@ -100,7 +94,7 @@ public class ProjectileGeometry : MonoBehaviour
             case 15:
                 y = Mathf.Sqrt(Mathf.Abs(4 - x * x)); break;
             case 16:
-                y = (2/(2 * Mathf.PI)) * Mathf.Cos(30); break;
+                y = (2 / (2 * Mathf.PI)) * Mathf.Cos(30); break;
             default:
                 y = coefficientY * Random.Range(-(x * coefficientX), (x * coefficientX));
                 break;
@@ -117,7 +111,7 @@ public class ProjectileGeometry : MonoBehaviour
             if (1 << collision.gameObject.layer == LayerMask.GetMask("Player") && collision.gameObject != owner && collision.gameObject.CompareTag("Player"))
             {
                 PlayerState ps = collision.GetComponent<PlayerState>();
-                if ( ps != null && ps.timerInvincibility<= 0 )
+                if (ps != null && ps.timerInvincibility <= 0)
                 {
                     ps.TakeDamage(damage);
                     Destroy(gameObject);
@@ -127,9 +121,8 @@ public class ProjectileGeometry : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }   
-        
-        
+        }
+
+
     }
-    
 }

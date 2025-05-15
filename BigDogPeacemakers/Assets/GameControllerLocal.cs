@@ -109,6 +109,7 @@ public class GameControllerLocal : MonoBehaviour
 
     public void ReculcScores()
     {
+        if (players is null) return;
         /*
         print("Количество игроков" + players.Count);
         activePlayers = players.Count;

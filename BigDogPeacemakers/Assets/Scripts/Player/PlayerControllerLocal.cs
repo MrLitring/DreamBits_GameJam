@@ -77,7 +77,11 @@ public class PlayerControllerLocal : MonoBehaviour
 
     public void OnDisable()
     {
-        var gameControllerLocal = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameControllerLocal>();
-        gameControllerLocal.DecreaseScore(Id);
+        var gameObjectGameController = GameObject.FindGameObjectWithTag("GameController");
+        if(gameObjectGameController != null)
+        {
+            var gameControllerLocal = gameObjectGameController.GetComponent<GameControllerLocal>();
+            gameControllerLocal.DecreaseScore(Id);
+        }
     }
 }
