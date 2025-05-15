@@ -37,7 +37,6 @@ public class LineGenerator : MonoBehaviour
                 lineRenderer.positionCount = 0;
                 numFormula = Random.Range(0, 13);
                 currentPos = startPos;
-                print(numFormula);
             }            
             lineRenderer.startWidth = 0.1f;
             lineRenderer.endWidth = 0.1f;

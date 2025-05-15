@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     PlayerInputHandler playerInputHandler;
     PlayerMovement playerMovement;
@@ -16,16 +17,23 @@ public class PlayerController : MonoBehaviour
     // Добавить инвентарь?
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+        if (!IsOwner) return;
         playerMovement = GetComponent<PlayerMovement>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
         groundChecker = GetComponentInChildren<GroundChecker>();
         playerAttack = GetComponent<PlayerAttack>();
         playerInteract = GetComponent<PlayerInteract>();
         playerState = GetComponent<PlayerState>();
-    }
+        NetworkObject no = GetComponent<NetworkObject>();
 
+    }
+    
     private void Update()
     {
+        if (!IsOwner) return;
+        
+        
 
         isPlay = playerState.Health > 0 && isActiveMovement ? true : false;
 
@@ -40,7 +48,9 @@ public class PlayerController : MonoBehaviour
             bool isGrounded = groundChecker.IsGrounded;
 
 
-            playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);
+            //playerMovement.UpdateInputData(move, isJump, isSprint, isDash, isInteract, isGrounded);
+            playerMovement.UpdateInputDataServerRpc(move, isJump, isGrounded);
+            print("Control Move " + move);
             playerAttack.UpdateInputData(isAttack, isGrounded);
             playerInteract.UpdateInputData(isInteract);
         }

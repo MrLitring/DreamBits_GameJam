@@ -1,3 +1,8 @@
-.unity-button{
-	font-size: 25;
+.buttons_main_menu {
+    font-size: 25;
+    background-image: url("project://database/Assets/Art/Sprites/UI/button.png");
+    background-color: rgba(0,0,0,0);
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/Art/ofont.ru_Grage.ttf");
+    border-width: 0;
 }
