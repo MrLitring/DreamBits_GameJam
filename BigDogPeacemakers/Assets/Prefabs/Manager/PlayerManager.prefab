@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2937626104626264914}
   - component: {fileID: 8909342096105299958}
   - component: {fileID: 8400793067871805695}
+  - component: {fileID: 213768815381762603}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: GameController
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2195393059
+  GlobalObjectIdHash: 2499524121
   InScenePlacedSourceGlobalObjectIdHash: 2499524121
   DeferredDespawnTick: 0
   Ownership: 1
@@ -111,3 +112,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   visual: {fileID: 6896795907719014129, guid: 5e5a12e55f0034e4fbf89b2092571875, type: 3}
+--- !u!114 &213768815381762603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953869608896972598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ad2fa26815bff4fb7a3b191cac0051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

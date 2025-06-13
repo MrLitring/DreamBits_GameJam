@@ -346,6 +346,8 @@ GameObject:
   - component: {fileID: 6357589847106455758}
   - component: {fileID: 7132736275699550678}
   - component: {fileID: -145862882619864821}
+  - component: {fileID: 1925516012324562609}
+  - component: {fileID: 8042269991802467585}
   m_Layer: 3
   m_Name: PlayerFighterLocal
   m_TagString: Player
@@ -550,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a4fc539ca88c64bb191415bdadd852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isKeyboard: 0
+  typeController: 0
 --- !u!114 &7132736275699550678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,6 +579,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 500
   jumpForce: 35
+--- !u!114 &1925516012324562609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985947408384544890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb455965a3657245b7fbe6a5034fd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 3}
+--- !u!114 &8042269991802467585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8985947408384544890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 49eabf416662fc049b347d3cf6aa3fe4, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 0}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
 --- !u!1001 &5603662647001743169
 PrefabInstance:
   m_ObjectHideFlags: 0

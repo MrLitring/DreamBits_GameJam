@@ -88,6 +88,7 @@ public class UIChoosePlayerLocal : MonoBehaviour
                 }
                 gameManager.ScoresToWin = sliderInt.value;
                 SceneManager.LoadScene("Level" + Random.Range(1,8));
+                
             }
         }
         
