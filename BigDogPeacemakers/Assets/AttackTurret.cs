@@ -4,8 +4,8 @@ public class AttackTurret : MonoBehaviour
 {
     public GameObject projectilePreFab;
 
-    private float timerAttack = 0;
-    private float cooldownAttack = 5f;
+    public float timerAttack = 0;
+    public float cooldownAttack = 5f;
 
     Animator animator;
 
