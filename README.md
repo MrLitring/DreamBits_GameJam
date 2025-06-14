@@ -15,7 +15,10 @@ Back To Geometry это соревновательная игра для нес�
 
 ![TurretPreview](Movie_003.gif)
 
-Гиф
-
 ![SawsPreview](Movie_005.gif)
 
+
+
+![GameplayPreview](Gameplay_01.gif)
+![GameplayPreview](Gameplay_02.gif)
+![GameplayPreview](Gameplay_03.gif)
